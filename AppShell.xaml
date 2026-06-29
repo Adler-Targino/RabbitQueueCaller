@@ -3,11 +3,23 @@
     x:Class="RabbitQueueCaller.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:RabbitQueueCaller"
+    xmlns:views="clr-namespace:RabbitQueueCaller.Views"
     Title="RabbitQueueCaller">
 
-    <ShellContent
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+
+        <ShellContent
+            Title="Consumer"
+            Shell.NavBarIsVisible="False"
+            ContentTemplate="{DataTemplate views:ConsumerPage}"
+            Route="ConsumerPage" />
+
+        <ShellContent
+            Title="Rabbit Configuration"
+            Shell.NavBarIsVisible="False"
+            ContentTemplate="{DataTemplate views:ConfigurationPage}"
+            Route="ConfigurationPage" />
+
+    </TabBar>
 
 </Shell>

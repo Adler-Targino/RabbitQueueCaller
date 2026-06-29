@@ -3,12 +3,11 @@ using RabbitQueueCaller.Models;
 using RabbitQueueCaller.Services;
 using System.Net;
 
-namespace RabbitQueueCaller
+namespace RabbitQueueCaller.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class ConfigurationPage : ContentPage
     {
-
-        public MainPage()
+        public ConfigurationPage()
         {
             InitializeComponent();
 
@@ -45,11 +44,10 @@ namespace RabbitQueueCaller
             if (!int.TryParse(port, out int httpPort))
             {
                 await DisplayAlertAsync(
-                "Erro",
-                "Falha ao se conectar ao RabbitMQ! (Porta inválida)",
+                "Error",
+                "Unable to connect to RabbitMQ!\n\n(Invalid port.)",
                 "OK");
             }
-
 
             try
             {
@@ -66,8 +64,8 @@ namespace RabbitQueueCaller
                 LoadingOverlay.IsVisible = false;
 
                 await DisplayAlertAsync(
-                "Sucesso",
-                "Conectado ao RabbitMQ!",
+                "Success",
+                "Connected to RabbitMQ!",
                 "OK");
             }
             catch
@@ -75,8 +73,8 @@ namespace RabbitQueueCaller
                 LoadingOverlay.IsVisible = false;
 
                 await DisplayAlertAsync(
-                "Erro",
-                "Falha ao se conectar ao RabbitMQ!",
+                "Error",
+                "Unable to connect to RabbitMQ!\n\nPlease check if your connection settings are correct.",
                 "OK");
             }
         }

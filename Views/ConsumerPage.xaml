@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RabbitQueueCaller.Views.ConsumerPage">
+    <Grid>
+        <ScrollView>
+
+            <VerticalStackLayout
+                Padding="30,30"
+                Spacing="25"
+                HorizontalOptions="Center">
+
+                <Label
+                    Text="Rabbit MQ Queue Publisher"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1" />
+
+                <Grid
+                    ColumnSpacing="15"
+                    ColumnDefinitions="7*,3*">
+
+                    <VerticalStackLayout
+                        Grid.Column="0"
+                        Spacing="10">
+                        <Label Text="Queue" />
+
+                        <Entry
+                            x:Name="QueueEntry"
+                            Placeholder="Queue Name"
+                            Text="" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout
+                        Grid.Column="1"
+                        Spacing="10">
+                        <Label Text="Message Count" />
+
+                        <Entry
+                            x:Name="CountEntry"
+                            Placeholder="1"
+                            Keyboard="Numeric"
+                            Text="1"/>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <VerticalStackLayout
+                    Grid.Column="0"
+                    Spacing="10">
+                    <Label Text="Message" />
+                    <Editor
+                        x:Name="MessageEditor"
+                        AutoSize="TextChanges"
+                        HeightRequest="200" />
+                </VerticalStackLayout>
+
+                <Button
+                    Text="Publish message"
+                    Clicked="PublishMessages"
+                    HorizontalOptions="Fill" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Overlay -->
+        <Grid
+            x:Name="LoadingOverlay"
+            IsVisible="False"
+            InputTransparent="False"
+            BackgroundColor="#80000000"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            ZIndex="100">
+
+            <VerticalStackLayout
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Spacing="15">
+
+                <ActivityIndicator
+                    IsRunning="True"
+                    WidthRequest="50"
+                    HeightRequest="50" />
+
+                <Label
+                    x:Name="LoadingOverlayLabel"
+                    Text="Validating connection..."
+                    TextColor="White"
+                    HorizontalOptions="Center" />
+
+            </VerticalStackLayout>
+
+        </Grid>
+    </Grid>
+</ContentPage>
