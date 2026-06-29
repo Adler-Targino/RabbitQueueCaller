@@ -67,7 +67,6 @@ public partial class ConsumerPage : ContentPage
             if (string.IsNullOrWhiteSpace(MessageEditor.Text))
                 throw new Exception("Message can't be null!");
 
-            var body = Encoding.UTF8.GetBytes(MessageEditor.Text);
             var properties = new BasicProperties
             {
                 ContentType = "application/json"
@@ -75,6 +74,13 @@ public partial class ConsumerPage : ContentPage
 
             for (int i = 1; i <= count; i++)
             {
+                string json = MessageEditor.Text;
+                if (RandomizeCheckBox.IsChecked)
+                    json = JsonRandomizer.Randomize(json);
+
+                var body = Encoding.UTF8.GetBytes(json);
+
+
                 await channel.BasicPublishAsync(
                     exchange: "",
                     routingKey: QueueEntry.Text,

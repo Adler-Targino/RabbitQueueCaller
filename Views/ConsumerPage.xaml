@@ -53,6 +53,17 @@
                         HeightRequest="200" />
                 </VerticalStackLayout>
 
+                <HorizontalStackLayout
+                    Margin="0,-20,0,-15"
+                    Spacing="-10">
+                    <CheckBox
+                        x:Name="RandomizeCheckBox" />
+
+                    <Label
+                        Text="Randomize Message"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
                 <Button
                     Text="Publish message"
                     Clicked="PublishMessages"
