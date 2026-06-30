@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json.Nodes;
 
 namespace RabbitQueueCaller.Services
@@ -60,6 +61,8 @@ namespace RabbitQueueCaller.Services
             if (text == "{Bool}")
                 return (Random.Next(2) == 0).ToString().ToLower();
 
+            bool useSha256 = text.Contains("(SHA256)");
+            text = text.Replace("(SHA256)", "");
 
             var sb = new StringBuilder();
 
@@ -81,7 +84,15 @@ namespace RabbitQueueCaller.Services
                 }
             }
 
-            return sb.ToString();
+            string result = sb.ToString();
+
+            if (useSha256)
+            {
+                byte[] hash = SHA256.HashData(Encoding.UTF8.GetBytes(result));
+                result = Convert.ToHexString(hash).ToLowerInvariant();
+            }
+
+            return result;
         }
     }
 }
